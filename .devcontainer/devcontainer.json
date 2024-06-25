@@ -1,0 +1,16 @@
+{
+  "name": "Node.js & TypeScript",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:18",
+  "postCreateCommand": "yarn install",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "redhat.vscode-yaml",
+        "humao.rest-client"
+      ]
+    }
+  }
+}
