@@ -64,6 +64,23 @@ yarn start
 yarn test
 ```
 
+## デプロイメント
+
+このプロジェクトはVercelにデプロイされています。
+
+デモ: [Chat UI MockUp](https://nextjs-chatbot-ui-mockup.vercel.app/)
+
+### Vercelへのデプロイ方法
+
+1. [Vercel](https://vercel.com/)でアカウントを作成します。
+2. このリポジトリをGitHubにプッシュします。
+3. Vercelダッシュボードで「New Project」をクリックします。
+4. GitHubリポジトリを選択し、「Import」をクリックします。
+5. 必要に応じて環境変数を設定します。
+6. 「Deploy」をクリックしてデプロイを開始します。
+
+詳細な手順については、[Next.jsのデプロイメントドキュメント](https://nextjs.org/docs/deployment)を参照してください。
+
 ## 技術スタック
 
 - [Next.js](https://nextjs.org/)
