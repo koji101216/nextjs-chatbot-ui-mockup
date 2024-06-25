@@ -1,14 +1,19 @@
 'use client';
 
 import React from 'react';
-import { Box, List, ListItem, ListItemButton, ListItemText, Divider, Typography, IconButton, useMediaQuery, Theme, useTheme } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, ListItemText, ListItemIcon, Divider, Typography, IconButton, useMediaQuery, Theme, useTheme, Avatar } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import CloseIcon from '@mui/icons-material/Close';
+import ChatIcon from '@mui/icons-material/Chat';
+import SettingsIcon from '@mui/icons-material/Settings';
+import HistoryIcon from '@mui/icons-material/History';
+import PersonIcon from '@mui/icons-material/Person';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 
 const dummyChats = [
-  { id: 1, title: 'チャット 1' },
-  { id: 2, title: 'チャット 2' },
-  { id: 3, title: 'チャット 3' },
+  { id: 1, title: 'チャット 1', lastMessage: 'こんにちは！', timestamp: '14:30' },
+  { id: 2, title: 'チャット 2', lastMessage: 'お疲れ様です。', timestamp: '昨日' },
+  { id: 3, title: 'チャット 3', lastMessage: 'ありがとうございました。', timestamp: '月曜日' },
 ];
 
 interface SidebarProps {
@@ -28,16 +33,24 @@ export default function Sidebar({ onClose }: SidebarProps) {
       borderRight: `1px solid ${theme.palette.divider}`,
       bgcolor: 'background.paper',
       boxShadow: 3,
+      display: 'flex',
+      flexDirection: 'column',
     }}>
       {isSmallScreen && (
         <IconButton onClick={onClose} sx={{ position: 'absolute', right: 8, top: 8 }}>
           <CloseIcon />
         </IconButton>
       )}
-      <Typography variant="h6" sx={{ marginBottom: 2, color: 'primary.main', fontWeight: 'bold' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
+        <Avatar sx={{ width: 40, height: 40, bgcolor: 'primary.main', mr: 2 }}>U</Avatar>
+        <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+          ユーザー名
+        </Typography>
+      </Box>
+      <Typography variant="subtitle1" sx={{ mb: 2, color: 'text.secondary', fontWeight: 'medium' }}>
         チャット履歴
       </Typography>
-      <List>
+      <List sx={{ flexGrow: 1, overflowY: 'auto' }}>
         {dummyChats.map((chat) => (
           <ListItem key={chat.id} disablePadding>
             <ListItemButton
@@ -49,13 +62,26 @@ export default function Sidebar({ onClose }: SidebarProps) {
                 },
               }}
             >
-              <ListItemText primary={chat.title} />
+              <ListItemIcon>
+                <ChatIcon color="primary" />
+              </ListItemIcon>
+              <ListItemText 
+                primary={chat.title} 
+                secondary={
+                  <React.Fragment>
+                    <Typography component="span" variant="body2" color="text.primary">
+                      {chat.lastMessage}
+                    </Typography>
+                    {" — " + chat.timestamp}
+                  </React.Fragment>
+                }
+              />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider sx={{ my: 2 }} />
-      <Typography variant="h6" sx={{ marginBottom: 2, color: 'primary.main', fontWeight: 'bold' }}>
+      <Typography variant="subtitle1" sx={{ mb: 2, color: 'text.secondary', fontWeight: 'medium' }}>
         設定
       </Typography>
       <List>
@@ -69,6 +95,9 @@ export default function Sidebar({ onClose }: SidebarProps) {
               },
             }}
           >
+            <ListItemIcon>
+              <PersonIcon color="primary" />
+            </ListItemIcon>
             <ListItemText primary="プロフィール編集" />
           </ListItemButton>
         </ListItem>
@@ -81,14 +110,14 @@ export default function Sidebar({ onClose }: SidebarProps) {
               },
             }}
           >
+            <ListItemIcon>
+              <NotificationsIcon color="primary" />
+            </ListItemIcon>
             <ListItemText primary="通知設定" />
           </ListItemButton>
         </ListItem>
       </List>
       <Divider sx={{ my: 2 }} />
-      <Typography variant="h6" sx={{ marginBottom: 2, color: 'primary.main', fontWeight: 'bold' }}>
-        その他
-      </Typography>
       <List>
         <ListItem disablePadding>
           <ListItemButton
@@ -100,6 +129,9 @@ export default function Sidebar({ onClose }: SidebarProps) {
               },
             }}
           >
+            <ListItemIcon>
+              <HistoryIcon color="primary" />
+            </ListItemIcon>
             <ListItemText primary="会話履歴" />
           </ListItemButton>
         </ListItem>
