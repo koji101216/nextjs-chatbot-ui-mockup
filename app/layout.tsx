@@ -7,8 +7,8 @@ import theme from './theme';
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Claude Chat UI",
-  description: "A Claude-inspired chat interface",
+  title: "Chat UI MockUp",
+  description: "A Chat UI MockUp",
 };
 
 export default function RootLayout({
